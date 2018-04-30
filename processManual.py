@@ -6,7 +6,7 @@ def combine(salary, stats):
     combined.append(["R", "Name", "Club", "Pos", "BaseSalary", "Compensation", "Apps", "SubApps", "Mins", "Goals", "Assists", "Yel", "Red", "SpG", "PS", "AerialsWon", "MotM", "Rating"])
 
     for index, row in salary.iterrows():
-        name = str(row["First Name"])+" "+str(row["Last Name"])
+        name = str(row["First Name"]).replace(" ", "") +" "+ str(row["Last Name"]).replace(" ", "")
 
         stat_temp = stats.loc[stats["Player"].str.contains(name)]
 
@@ -18,7 +18,7 @@ def combine(salary, stats):
         R = stat_temp["R"]
         R = int(R)
 
-        Name = str(name.replace(" ", ""))
+        Name = name
 
         Club = str(row["Club"].replace(" ", ""))
 
@@ -102,15 +102,8 @@ if __name__ == "__main__":
 
         stats_17 = pandas.read_csv("manual/17stats.csv", sep="\t")
 
-        # get column names
-
-        # print(list(salary_16))
-        # print(list(stats_16))
-        # print(list(salary_17))
-        # print(list(stats_17))
-
-        salaries = [salary_16, salary_17]
-        stats = [stats_16, stats_17]
-
         y16 = combine(salary_16, stats_16)
         y17 = combine(salary_17, stats_17)
+
+        y16.to_csv("clean/2016.csv")
+        y17.to_csv("clean/2017.csv")
