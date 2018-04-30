@@ -6,8 +6,15 @@ def combine(salary, stats):
     combined.append(["R", "Name", "Club", "Pos", "BaseSalary", "Compensation", "Apps", "SubApps", "Mins", "Goals", "Assists", "Yel", "Red", "SpG", "PS", "AerialsWon", "MotM", "Rating"])
 
     for index, row in salary.iterrows():
-        name = str(row["First Name"]).replace(" ", "") +" "+ str(row["Last Name"]).replace(" ", "")
-
+        if str(row["First Name"]).replace(" ", "") == "":
+            print("occured1")
+            name = str(row["Last Name"]).replace(" ", "")
+        elif str(row["Last Name"]).replace(" ", "") == "":
+            print("occured2")
+            name = str(row["First Name"]).replace(" ", "")
+        else:
+            name = str(row["First Name"]).replace(" ", "") +" "+ str(row["Last Name"]).replace(" ", "")
+            
         stat_temp = stats.loc[stats["Player"].str.contains(name)]
 
         # get rid of rows where no such row was found
@@ -96,11 +103,11 @@ if __name__ == "__main__":
 
         salary_16 = pandas.read_csv("manual/16salary.csv", sep="\t")
 
-        stats_16 = pandas.read_csv("manual/16stats.csv", sep=",")
+        stats_16 = pandas.read_csv("accent-free/16stats.csv", sep=",")
 
         salary_17 = pandas.read_csv("manual/17salary.csv", sep="\t")
 
-        stats_17 = pandas.read_csv("manual/17stats.csv", sep="\t")
+        stats_17 = pandas.read_csv("accent-free/17stats.csv", sep="\t")
 
         y16 = combine(salary_16, stats_16)
         y17 = combine(salary_17, stats_17)
