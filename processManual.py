@@ -6,15 +6,15 @@ def combine(salary, stats):
     combined.append(["R", "Name", "Club", "Pos", "BaseSalary", "Compensation", "Apps", "SubApps", "Mins", "Goals", "Assists", "Yel", "Red", "SpG", "PS", "AerialsWon", "MotM", "Rating"])
 
     for index, row in salary.iterrows():
-        if str(row["First Name"]).replace(" ", "") == "":
+        if str(row["First Name"]).replace(" ", "") == "nan":
             print("occured1")
             name = str(row["Last Name"]).replace(" ", "")
-        elif str(row["Last Name"]).replace(" ", "") == "":
+        elif str(row["Last Name"]).replace(" ", "") == "nan":
             print("occured2")
             name = str(row["First Name"]).replace(" ", "")
         else:
             name = str(row["First Name"]).replace(" ", "") +" "+ str(row["Last Name"]).replace(" ", "")
-            
+
         stat_temp = stats.loc[stats["Player"].str.contains(name)]
 
         # get rid of rows where no such row was found
