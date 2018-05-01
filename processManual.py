@@ -7,10 +7,8 @@ def combine(salary, stats):
 
     for index, row in salary.iterrows():
         if str(row["First Name"]).replace(" ", "") == "nan":
-            print("occured1")
             name = str(row["Last Name"]).replace(" ", "")
         elif str(row["Last Name"]).replace(" ", "") == "nan":
-            print("occured2")
             name = str(row["First Name"]).replace(" ", "")
         else:
             name = str(row["First Name"]).replace(" ", "") +" "+ str(row["Last Name"]).replace(" ", "")
@@ -97,6 +95,13 @@ def combine(salary, stats):
 
     return combined
 
+def combineClean(y1, y2):
+    for index, row in y1.iterrows():
+        stat_temp = y2.loc[y2["Name"].str.contains(row["Name"])]
+        
+        if len(stat_temp)!=1:
+            continue
+
 
 
 if __name__ == "__main__":
@@ -114,3 +119,5 @@ if __name__ == "__main__":
 
         y16.to_csv("clean/2016.csv")
         y17.to_csv("clean/2017.csv")
+
+        data = combineClean(y16, y17)
