@@ -8,7 +8,7 @@ summary(y17)
 for(i in 1:nrow(y16)) {
   row <- y16[i,]
   x = match(row$Name, y17$Name)
-  print(x)
+  if
   
   
 }

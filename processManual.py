@@ -96,11 +96,77 @@ def combine(salary, stats):
     return combined
 
 def combineClean(y1, y2):
+
+    combined = []
+
+    combined.append(["R1", "R2", "Name1", "Name2", "Club1", "Club2", "Pos1", "Pos2", "BaseSalary1", "BaseSalary2", "Compensation1", "Compensation2", "Apps1", "Apps2", "SubApps1", "SubApps2", "Mins1", "Mins2", "Goals1", "Goals2", "Assists1", "Assists2", "Yel1", "Yel2", "Red1", "Red2", "SpG1", "SpG2", "PS1", "PS2", "AerialsWon1", "AerialsWon2", "MotM1", "MotM2", "Rating1", "Rating2"])
+
     for index, row in y1.iterrows():
         stat_temp = y2.loc[y2["Name"].str.contains(row["Name"])]
-        
+
         if len(stat_temp)!=1:
             continue
+
+        R1 = row["R"]
+        R2 = stat_temp["R"].values[0]
+
+        Name1 = row["Name"]
+        Name2 = stat_temp["Name"].values[0]
+
+        Club1 = row["Club"]
+        Club2 = stat_temp["Club"].values[0]
+
+        Pos1 = row["Pos"]
+        Pos2 = stat_temp["Pos"].values[0]
+
+        BaseSalary1 = row["BaseSalary"]
+        BaseSalary2 = stat_temp["BaseSalary"].values[0]
+
+        Compensation1 = row["Compensation"]
+        Compensation2 = stat_temp["Compensation"].values[0]
+
+        Apps1 = row["Apps"]
+        Apps2 = stat_temp["Apps"].values[0]
+
+        SubApps1 = row["SubApps"]
+        SubApps2 = stat_temp["SubApps"].values[0]
+
+        Mins1 = row["Mins"]
+        Mins2 = stat_temp["Mins"].values[0]
+
+        Goals1 = row["Goals"]
+        Goals2 = stat_temp["Goals"].values[0]
+
+        Assists1 = row["Assists"]
+        Assists2 = stat_temp["Assists"].values[0]
+
+        Yel1 = row["Yel"]
+        Yel2 = stat_temp["Yel"].values[0]
+
+        Red1 = row["Red"]
+        Red2 = stat_temp["Red"].values[0]
+
+        SpG1 = row["SpG"]
+        SpG2 = stat_temp["SpG"].values[0]
+
+        PS1 = row["PS"]
+        PS2 = stat_temp["PS"].values[0]
+
+        AerialsWon1 = row["AerialsWon"]
+        AerialsWon2 = stat_temp["AerialsWon"].values[0]
+
+        MotM1 = row["MotM"]
+        MotM2 = stat_temp["MotM"].values[0]
+
+        Rating1 = row["Rating"]
+        Rating2 = stat_temp["Rating"].values[0]
+
+        combined.append([R1, R2, Name1, Name2, Club1, Club2, Pos1, Pos2, BaseSalary1, BaseSalary2, Compensation1, Compensation2, Apps1, Apps2, SubApps1, SubApps2, Mins1, Mins2, Goals1, Goals2, Assists1, Assists2, Yel1, Yel2, Red1, Red2, SpG1, SpG2, PS1, PS2, AerialsWon1, AerialsWon2, MotM1, MotM2, Rating1, Rating2])
+
+    combined = pandas.DataFrame(combined[1:],columns=combined[0])
+
+    return combined
+
 
 
 
@@ -121,3 +187,4 @@ if __name__ == "__main__":
         y17.to_csv("clean/2017.csv")
 
         data = combineClean(y16, y17)
+        data.to_csv("clean/2016-2017.csv")
